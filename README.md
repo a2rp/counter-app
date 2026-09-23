@@ -1,13 +1,38 @@
-# counter app
+# Counter App
 
-A frontend project from the repository collection.
+A focused React and Vite counter with adjustable step values, keyboard controls, and a clean monochrome interface.
 
-<!-- Project links -->
+![Counter App screenshot](screenshot.png)
+
+## Features
+
+- Increase, decrease, and reset controls
+- Adjustable step size from 1 to 100
+- Keyboard support with ArrowUp, ArrowDown, plus, minus, and 0
+- Responsive fixed header and icon-based footer links
+
+## Tech stack
+
+- React
+- Vite
+- React Icons
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+Build and deploy to GitHub Pages with:
+
+```bash
+npm run build
+npm run deploy
+```
 
 ## Links
 
-- Live: [https://a2rp.github.io/counter-app/](https://a2rp.github.io/counter-app/)
-- Repository: [https://github.com/a2rp/counter-app](https://github.com/a2rp/counter-app)
 - Portfolio: [https://www.ashishranjan.net/](https://www.ashishranjan.net/)
 - GitHub: [https://github.com/a2rp](https://github.com/a2rp)
 - CodePen: [https://codepen.io/ash1198](https://codepen.io/ash1198)
