@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
+  FiArrowUp,
   FiCoffee,
   FiFacebook,
   FiGithub,
@@ -32,6 +33,7 @@ const footerLinks = [
 function App() {
   const [count, setCount] = useState(0);
   const [step, setStep] = useState(1);
+  const [showGoTop, setShowGoTop] = useState(false);
 
   useEffect(() => {
     const handleKey = (event) => {
@@ -44,6 +46,13 @@ function App() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [step]);
 
+  useEffect(() => {
+    const handleScroll = () => setShowGoTop(window.scrollY > 320);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const resetCount = () => setCount(0);
 
   return (
@@ -85,6 +94,8 @@ function App() {
           <label className="stepControl">Step size<input type="number" min="1" max="100" value={step} onChange={(event) => setStep(Math.max(1, Number(event.target.value) || 1))} /></label>
           <div className="cardFooter"><span>ArrowUp / + increase</span><span>ArrowDown / - decrease</span><span>0 reset</span></div>
         </section>
+
+        {showGoTop && <button className="goTopButton" type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Go to top" title="Go to top"><FiArrowUp /></button>}
 
         <footer className="siteFooter">
           <p>&copy; {new Date().getFullYear()} All rights reserved. By <a href="https://www.ashishranjan.net/" target="_blank" rel="noopener noreferrer">Ashish Ranjan</a></p>

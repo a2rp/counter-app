@@ -103,3 +103,35 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .cardFooter { flex-wrap: wrap; }
   .controls button span { display: none; }
 }
+
+.goTopButton {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 20;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid #454545;
+  border-radius: 50%;
+  color: #f4f4f4;
+  background: #202020;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .28);
+  transition: color .2s, border-color .2s, box-shadow .2s, transform .2s;
+}
+
+.goTopButton:hover,
+.goTopButton:focus-visible {
+  border-color: #fff;
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, .08);
+  transform: translateY(-2px);
+}
+
+.goTopButton svg { width: 18px; height: 18px; }
+
+@media (max-width: 480px) {
+  .goTopButton { right: 16px; bottom: 16px; }
+}

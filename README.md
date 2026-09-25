@@ -10,6 +10,7 @@ A focused React and Vite counter with adjustable step values, keyboard controls,
 - Adjustable step size from 1 to 100
 - Keyboard support with ArrowUp, ArrowDown, plus, minus, and 0
 - Responsive fixed header and icon-based footer links
+- Floating go-to-top control with smooth scrolling
 
 ## Tech stack
 
