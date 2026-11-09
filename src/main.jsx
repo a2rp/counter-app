@@ -37,8 +37,19 @@ function App() {
 
   useEffect(() => {
     const handleKey = (event) => {
-      if (event.key === "ArrowUp" || event.key === "+") setCount((value) => value + step);
-      if (event.key === "ArrowDown" || event.key === "-") setCount((value) => value - step);
+      const target = event.target;
+      const isEditing = target instanceof HTMLElement
+        && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+      if (isEditing || event.altKey || event.ctrlKey || event.metaKey) return;
+
+      if (event.key === "ArrowUp" || event.key === "+") {
+        if (event.key === "ArrowUp") event.preventDefault();
+        setCount((value) => value + step);
+      }
+      if (event.key === "ArrowDown" || event.key === "-") {
+        if (event.key === "ArrowDown") event.preventDefault();
+        setCount((value) => value - step);
+      }
       if (event.key === "0") setCount(0);
     };
 
@@ -53,6 +64,10 @@ function App() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const updateStep = (event) => {
+    const value = Number.parseInt(event.target.value, 10);
+    setStep(Number.isNaN(value) ? 1 : Math.min(100, Math.max(1, value)));
+  };
   const resetCount = () => setCount(0);
 
   return (
@@ -76,8 +91,8 @@ function App() {
             <h1 id="counter-title">Count what matters.</h1>
             <p className="intro">A focused counter with no distractions. Use the controls or your keyboard.</p>
           </div>
-          <div className="display" aria-live="polite"><span>{count}</span></div>
-          <div className="controls" aria-label="Counter controls">
+          <div className="display" aria-live="polite" aria-atomic="true"><span>{count}</span></div>
+          <div className="controls" role="group" aria-label="Counter controls">
             <button type="button" onClick={() => setCount((value) => value - step)} aria-label="Decrease">
               <FiMinus aria-hidden="true" />
               <span>Decrease</span>
@@ -91,7 +106,7 @@ function App() {
               <span>Increase</span>
             </button>
           </div>
-          <label className="stepControl">Step size<input type="number" min="1" max="100" value={step} onChange={(event) => setStep(Math.max(1, Number(event.target.value) || 1))} /></label>
+          <label className="stepControl">Step size<input type="number" min="1" max="100" step="1" value={step} onChange={updateStep} /></label>
           <div className="cardFooter"><span>ArrowUp / + increase</span><span>ArrowDown / - decrease</span><span>0 reset</span></div>
         </section>
 
