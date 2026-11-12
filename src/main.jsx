@@ -39,7 +39,7 @@ function App() {
     const handleKey = (event) => {
       const target = event.target;
       const isEditing = target instanceof HTMLElement
-        && (target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName));
+        && (target.isContentEditable || Boolean(target.closest("input, textarea, select, button, a[href], [role='button'], [contenteditable='true']")));
       if (isEditing || event.altKey || event.ctrlKey || event.metaKey) return;
 
       if (event.key === "ArrowUp" || event.key === "+") {
